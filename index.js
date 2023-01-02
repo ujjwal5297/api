@@ -25,21 +25,21 @@ let subRegionRef= document.getElementById('sub-region');
 //     console.log(data);
 // })
 
-const generateJokes = ()=> {
+// const generateJokes = ()=> {
 
-    const SetHeader = {
-        headers : {
-            Accept: "application/json"
-        }
-    }
+//     const SetHeader = {
+//         headers : {
+//             Accept: "application/json"
+//         }
+//     }
 
-    fetch("https://icanhazdadjoke.com",SetHeader)
-    .then((res)=>res.json())
-    .then((data)=> {
-        containerRef.innerHTML = data.joke;
-    })
-    .catch((err)=>{console.log(err)})
-}
+//     fetch("https://icanhazdadjoke.com",SetHeader)
+//     .then((res)=>res.json())
+//     .then((data)=> {
+//         containerRef.innerHTML = data.joke;
+//     })
+//     .catch((err)=>{console.log(err)})
+// }
 
 // btnRef.addEventListener('click', generateJokes);
 
@@ -47,7 +47,8 @@ const generateJokes = ()=> {
 const countryData = ()=> {
     fetch("https://restcountries.com/v3.1/name/india")
     .then((res)=>res.json())
-    .then((data)=>{nameRef.innerHTML= data.name})
+    .then((data)=>console.log(data))
+    .then((data)=>{nameRef.innerHTML= data.name.common})
     .catch((err)=>{console.log(err)})
 }
 btnRef.addEventListener('click', countryData);
