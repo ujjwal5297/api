@@ -1,7 +1,7 @@
 const containerRef = document.getElementById('container');
 const btnRef = document.getElementById('btn');
 
-let nameRef= document.getElementById('name');
+
 let flagRef= document.getElementById('flag');
 let capitalRef= document.getElementById('capital');
 let populationRef= document.getElementById('population');
@@ -47,8 +47,8 @@ let subRegionRef= document.getElementById('sub-region');
 const countryData = ()=> {
     fetch("https://restcountries.com/v3.1/name/india")
     .then((res)=>res.json())
-    .then((data)=>console.log(data))
-    .then((data)=>{nameRef.innerHTML= data.name.common})
+    .then((data)=>console.log(data[0].name.common))
+    .then((data)=>{nameRef.innerHTML= data[0].name.common})
     .catch((err)=>{console.log(err)})
 }
 btnRef.addEventListener('click', countryData);
