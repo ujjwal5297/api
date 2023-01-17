@@ -1,13 +1,17 @@
 const containerRef = document.getElementById('container');
 const btnRef = document.getElementById('btn');
+const btnRef1 = document.getElementById('btn1');
+const btnRef2 = document.getElementById('btn2');
 
-
+let nameRef= document.getElementById('name');
 let flagRef= document.getElementById('flag');
 let capitalRef= document.getElementById('capital');
 let populationRef= document.getElementById('population');
 let nativeLanguageRef= document.getElementById('native-language');
 let regionRef= document.getElementById('region');
 let subRegionRef= document.getElementById('sub-region');
+let dogImgRef= document.getElementById('dogImage');
+
 
 
 // const request = new XMLHttpRequest();
@@ -25,36 +29,52 @@ let subRegionRef= document.getElementById('sub-region');
 //     console.log(data);
 // })
 
-// const generateJokes = ()=> {
+const generateJokes = ()=> {
 
-//     const SetHeader = {
-//         headers : {
-//             Accept: "application/json"
-//         }
-//     }
+    const SetHeader = {
+        headers : {
+            Accept: "application/json"
+        }
+    }
 
-//     fetch("https://icanhazdadjoke.com",SetHeader)
-//     .then((res)=>res.json())
-//     .then((data)=> {
-//         containerRef.innerHTML = data.joke;
-//     })
-//     .catch((err)=>{console.log(err)})
-// }
+    fetch("https://icanhazdadjoke.com",SetHeader)
+    .then((res)=>res.json())
+    .then((data)=> {
+        containerRef.innerHTML = data.joke;
+    })
+    .catch((err)=>{console.log(err)})
+}
 
-// btnRef.addEventListener('click', generateJokes);
+btnRef.addEventListener('click', generateJokes);
 
 
 const countryData = ()=> {
     fetch("https://restcountries.com/v3.1/name/india")
     .then((res)=>res.json())
-    .then((data)=>console.log(data[0].name.common))
-    .then((data)=>{nameRef.innerHTML= data[0].name.common})
+    // .then((data)=>console.log(data))
+    .then((data)=>{
+        console.log(data);
+        nameRef.innerHTML= data[0].name.common;
+        flagRef.src= "https://flagcdn.com/w320/in.png";
+        capitalRef.innerHTML= data[0].capital;
+        populationRef.innerHTML= data[0].population;
+        nativeLanguageRef.innerHTML= data[0].languages.hin;
+        regionRef.innerHTML= data[0].region;
+        subRegionRef.innerHTML= data[0].subregion;
+    })
     .catch((err)=>{console.log(err)})
 }
-btnRef.addEventListener('click', countryData);
+btnRef1.addEventListener('click', countryData);
 
-
-
-
+const dogImg = ()=> {
+     fetch("https://dog.ceo/api/breeds/image/random")
+     .then((res)=>res.json())
+     .then((data)=>{
+        console.log(data);
+dogImgRef.src = data.message;
+     })
+     .catch((err)=>{console.log(err)})
+}
+btnRef2.addEventListener('click',dogImg);
 
 
