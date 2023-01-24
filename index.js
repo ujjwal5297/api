@@ -12,6 +12,13 @@ let regionRef= document.getElementById('region');
 let subRegionRef= document.getElementById('sub-region');
 let dogImgRef= document.getElementById('dogImage');
 
+let astronomyRef= document.getElementById('astronomy_container');
+let astronomyDateRef= document.getElementById('astronomy_date');
+let astronomyRefTitle= document.getElementById('astronomy_title');
+let astronomyRefExplaination= document.getElementById('astronomy_explaination');
+let astronomyRefImg= document.getElementById('astronomy_image');
+let astronomyRefImg1= document.getElementById('astronomy_image_hd');
+
 
 
 // const request = new XMLHttpRequest();
@@ -70,11 +77,102 @@ const dogImg = ()=> {
      fetch("https://dog.ceo/api/breeds/image/random")
      .then((res)=>res.json())
      .then((data)=>{
-        console.log(data);
+        // console.log(data);
 dogImgRef.src = data.message;
      })
      .catch((err)=>{console.log(err)})
 }
 btnRef2.addEventListener('click',dogImg);
 
+async function getHolidayData()
+{
+    try{
+        let res = await fetch("https://date.nager.at/api/v2/publicholidays/2020/US");
+        // console.log(res);
+        data= await res.json();
+        // console.log(data);
+        return data;
+    }
+    catch(error){
+        console.log(error);
+    }
+}
 
+getHolidayData();
+
+async function displayHolidayData()
+{
+    let holiday = await getHolidayData();
+    console.log(holiday);
+
+    let html ="";
+
+    holiday.forEach((h,i)=> {
+        console.log(h);
+        console.log(i);
+
+        let htmlElement = `<h3> Holiday Date : ${h.date} </h3>
+        <h3> Holiday Name : ${h.localName} </h3>
+        <h3> Holiday Type : ${h.type} </h3>
+        <h3> Country Code : ${h.countryCode}</h3>`
+
+        html+= htmlElement
+    });
+
+    let holidayRef = document.getElementById("holiday_container");
+    holidayRef.innerHTML = html;
+}
+displayHolidayData();
+
+async function Astronomy() {
+    try{
+        let res = await fetch(" https://go-apod.herokuapp.com/apod");
+        console.log(res);
+        data= await res.json();
+        console.log(data);
+        return data;
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
+let astronomy= Astronomy().then((data)=>{
+    astronomyDateRef.innerHTML= data.date;
+    astronomyRefTitle.innerHTML = data.title;
+    astronomyRefExplaination.innerHTML = data.explanation;
+    astronomyRefImg.src = data.url;
+    // astronomyRefImg1.src = data.hdurl;
+
+});
+
+let astronomyhdimg= Astronomy().then((data)=>{
+    astronomyRefImg1.src = data.hdurl;
+});
+
+astronomyRef.addEventListener('onLoad', astronomy);
+
+document.getElementById('hdImageButton').addEventListener('onClick',astronomyhdimg);
+
+
+// async function displayAstronomy(){
+//     let astronomy = await Astronomy();
+
+//     let html = "";
+    
+//     astronomy.forEach((item) => {
+//         let htmlElement = `
+//         <p>Date :${item.date}</p>
+//         <p>Title :${item.title}</p>
+//         <p>Explaination:${item.explaination}</p>
+//         <img src= ${item.url}
+//         />
+//         `
+//         html+= htmlElement;
+//     });
+
+//     let astronomyRef = document.getElementById('astronomy_container');
+//     astronomyRef.innerHTML= html;
+// }
+
+// displayAstronomy();
