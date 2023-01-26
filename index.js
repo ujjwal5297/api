@@ -61,13 +61,13 @@ const countryData = ()=> {
     // .then((data)=>console.log(data))
     .then((data)=>{
         console.log(data);
-        nameRef.innerHTML= data[0].name.common;
+        nameRef.innerHTML= `Country: ${data[0].name.common}`;
         flagRef.src= "https://flagcdn.com/w320/in.png";
-        capitalRef.innerHTML= data[0].capital;
-        populationRef.innerHTML= data[0].population;
-        nativeLanguageRef.innerHTML= data[0].languages.hin;
-        regionRef.innerHTML= data[0].region;
-        subRegionRef.innerHTML= data[0].subregion;
+        capitalRef.innerHTML= `Capital: ${data[0].capital}`;
+        populationRef.innerHTML= `Population:${data[0].population}`;
+        nativeLanguageRef.innerHTML= `Native Language:${data[0].languages.hin}`;
+        regionRef.innerHTML= `Region: ${data[0].region}`;
+        subRegionRef.innerHTML= `Sub-region:${data[0].subregion}`;
     })
     .catch((err)=>{console.log(err)})
 }
@@ -150,9 +150,9 @@ let astronomyhdimg= Astronomy().then((data)=>{
     astronomyRefImg1.src = data.hdurl;
 });
 
-astronomyRef.addEventListener('onLoad', astronomy);
+// astronomyRef.addEventListener('onLoad', astronomy);
 
-document.getElementById('hdImageButton').addEventListener('onClick',astronomyhdimg);
+// document.getElementById('hdImageButton').addEventListener('click',astronomyhdimg);
 
 
 // async function displayAstronomy(){
