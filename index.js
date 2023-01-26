@@ -176,3 +176,44 @@ let astronomyhdimg= Astronomy().then((data)=>{
 // }
 
 // displayAstronomy();
+
+async function getTVshows()
+{
+    let url = 'http://api.tvmaze.com/search/shows?q=golden%20girls';
+    try
+    {
+        let res =await fetch(url);
+        data = await res.json();
+        return data;
+    }
+    catch(error)
+    {
+        console.log(error);
+    }
+}
+getTVshows();
+async function displayTVshows()
+{
+    let shows = await getTVshows();
+
+    let html ="";
+
+    shows.forEach((showElement, index)=>{
+        let htmlSegment = ` <div class="col-lg-4 col-md-4 col-10 col-xxl-4 mx-auto">
+        <div class="card mb-3" style="max-width: 540px;">
+          <h4 class="text-capitalize text-center">${showElement.show.name}</h4>
+          <img src="${showElement.show.image.medium}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <p class="card-text">Premier Date : ${showElement.show.premiered}</p>
+            <p class="card-text">Show Type : ${showElement.show.type}</p>
+            <p class="card-text">Show Status : ${showElement.show.status}</p>
+          </div>
+        </div>
+      </div>`;
+      html += htmlSegment;
+        })
+
+        let conatiner2= document.getElementById("card");
+        conatiner2.innerHTML = html;
+}
+displayTVshows()
