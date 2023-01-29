@@ -141,14 +141,10 @@ let astronomy= Astronomy().then((data)=>{
     astronomyDateRef.innerHTML= data.date;
     astronomyRefTitle.innerHTML = data.title;
     astronomyRefExplaination.innerHTML = data.explanation;
-    astronomyRefImg.src = data.url;
+    //astronomyRefImg.src = data.url;
     // astronomyRefImg1.src = data.hdurl;
 
 });
-
-// let astronomyhdimg= Astronomy().then((data)=>{
-//     astronomyRefImg1.src = data.hdurl;
-// });
 
 async function astronomyImageDisplay(){
     let astronomyData = await Astronomy();
@@ -169,6 +165,12 @@ const displayImgs=async()=>
 let btnRef3 = document.getElementById("hdImageButton");
 
 btnRef3.addEventListener('click',displayImgs);
+
+
+
+// let astronomyhdimg= Astronomy().then((data)=>{
+//     astronomyRefImg1.src = data.hdurl;
+// });
 
 // astronomyRef.addEventListener('onLoad', astronomy);
 
